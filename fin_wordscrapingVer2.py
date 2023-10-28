@@ -7,7 +7,7 @@ from google.colab import drive
 drive.mount('/content/drive')
 
 # ウェブページのURLを指定
-url = 'https://linnameigetz.com/finnish-naming'
+url = 'https://example.com/'
 
 # ウェブページからデータを取得
 response = requests.get(url)
@@ -17,7 +17,7 @@ soup = BeautifulSoup(response.text, 'html.parser')
 tbody_tags = soup.find_all('tbody')
 
 # ファイル名の数字を決定
-directory_path = '/content/drive/My Drive/fin_Scraping'
+directory_path = '/content/drive/My Drive/example'
 existing_files = os.listdir(directory_path)
 existing_numbers = [int(filename.split('_')[-1].split('.')[0]) for filename in existing_files if filename.startswith('finland_word_')]
 next_number = max(existing_numbers, default=-1) + 1
@@ -29,8 +29,8 @@ with open(f'{directory_path}/finland_word_{next_number}.txt', 'w', encoding='utf
         for row in rows:
             columns = row.find_all('td')
             if len(columns) >= 3:
-                data1 = columns[1].get_text()  # 2番目のカラムのテキスト
-                data2 = columns[2].get_text()  # 3番目のカラムのテキスト
+                data1 = columns[1].get_text() 
+                data2 = columns[2].get_text() 
                 file.write(f"{data1},{data2}\n")
 
 print(f'ファイルを {directory_path} に保存しました。')
